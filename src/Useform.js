@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 function validate(validations, values) {
     const errors = validations
       .map(validation => validation(values))
@@ -8,10 +8,10 @@ function validate(validations, values) {
   
   export function useForm(initialState = {}, validations = [], onSubmit = () => {}) {
     const {isValid: initialIsValid, errors: initialErrors} = validate(validations, initialState);
-    const [touched, setTouched] = useState({});
     const [values, setValues] = useState(initialState);
     const [errors, setErrors] = useState(initialErrors);
     const [isValid, setValid] = useState(initialIsValid);
+    const [touched, setTouched] = useState({});
   
     const changeHandler = ({target: {value, name}}) => {
       const newValues = {...values, [name]: value};
@@ -25,8 +25,9 @@ function validate(validations, values) {
     const submitHandler = event => {
       event.preventDefault();
       console.log(values)
+      setValues({firstName: '', lastName: '', email: ''})
     };
-  
+   
     return {values, errors, touched, isValid, changeHandler, submitHandler};
   }
   

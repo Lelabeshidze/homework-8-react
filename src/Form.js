@@ -5,9 +5,11 @@ export const Form = (onSubmit) => {
     const validations = [
       ({firstName}) => isRequired(firstName) || {firstName: 'First name is required'},
       ({lastName}) => isRequired(lastName) || {lastName: 'Last name is required'},
-      ({email}) => isRequired(email) || {email: 'E-mail is required'},
-    ];
-    const {values, errors, touched, isValid, changeHandler, submitHandler} = useForm(initialState, validations, onSubmit);
+      ({email}) => isRequired(email) || {email: 'E-mail is required'}
+    
+    ]
+    const {values, errors,isValid, touched, changeHandler, submitHandler} = useForm(initialState, validations, onSubmit);
+
 	return (
         <form
         className="signup-form"
